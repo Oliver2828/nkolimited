@@ -25,95 +25,144 @@ export default function Process() {
     },
   ]
 
-  const container = {
+  const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2
+        staggerChildren: 0.15,
+        delayChildren: 0.2
       }
     }
   }
 
-  const item = {
-    hidden: { y: 20, opacity: 0 },
+  const stepVariants = {
+    hidden: { y: 30, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
       transition: {
-        duration: 0.6
+        type: "spring",
+        stiffness: 100,
+        damping: 15
+      }
+    },
+    hover: {
+      y: -5,
+      transition: { 
+        type: "spring",
+        stiffness: 300,
+        damping: 15
+      }
+    }
+  }
+
+  const connectorVariants = {
+    hidden: { opacity: 0, pathLength: 0 },
+    visible: {
+      opacity: 1,
+      pathLength: 1,
+      transition: {
+        duration: 1,
+        ease: "easeInOut"
       }
     }
   }
 
   return (
-    <section id="process" className="bg-orange-50 py-24 sm:py-32">
+    <section id="process" className="py-24 sm:py-32 bg-white">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          viewport={{ once: true, margin: "-100px" }}
           className="mx-auto max-w-2xl text-center"
         >
-          <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-            Our Proven Process
+          <h2 className="text-3xl font-light tracking-tight text-gray-900 sm:text-4xl">
+            Our Proven <span className="text-orange-500">Process</span>
           </h2>
-          <p className="mt-6 text-lg font-bold leading-8 text-gray-600">
+          <motion.div
+            initial={{ width: 0 }}
+            whileInView={{ width: '100px' }}
+            transition={{ delay: 0.3, duration: 0.6 }}
+            className="mx-auto mt-4 h-0.5 bg-orange-500"
+          />
+          <p className="mt-6 text-lg leading-8 text-gray-600">
             Simple, transparent steps to get you the workforce solutions you need.
           </p>
         </motion.div>
         
         <motion.div
-          variants={container}
+          variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true }}
-          className="mt-16"
+          viewport={{ once: true, margin: "-100px" }}
+          className="mt-16 relative"
         >
-          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {steps.map((step, stepIdx) => (
+          {/* Horizontal line for mobile */}
+          <motion.div
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            transition={{ duration: 1 }}
+            className="absolute left-1/2 top-16 h-full w-0.5 bg-orange-200 -translate-x-1/2 sm:hidden"
+          />
+          
+          <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-4">
+            {steps.map((step, index) => (
               <motion.div
                 key={step.name}
-                variants={item}
-                whileHover={{ scale: 1.05 }}
-                className="relative"
+                variants={stepVariants}
+                whileHover="hover"
+                className="relative group"
               >
-                <div className="flex flex-col items-center text-center bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 h-full">
-                  <div className="flex h-14 w-14 items-center justify-center rounded-full bg-orange-600 text-white font-bold text-lg">
-                    {step.id}
-                  </div>
-                  <h3 className="mt-6 text-lg font-extrabold leading-8 text-gray-900">
-                    {step.name}
-                  </h3>
-                  <p className="mt-2 text-base font-bold leading-7 text-gray-600">
-                    {step.description}
-                  </p>
-                </div>
-                {stepIdx !== steps.length - 1 ? (
-                  <motion.div 
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    transition={{ delay: 0.4 }}
-                    viewport={{ once: true }}
-                    className="absolute top-16 right-0 hidden h-full w-28 translate-x-12 sm:block"
+                <div className="flex flex-col items-center text-center bg-white p-8 rounded-xl shadow-lg hover:shadow-xl border border-gray-100 transition-all duration-300 h-full">
+                  <motion.div
+                    whileHover={{ rotate: 10, scale: 1.1 }}
+                    className="flex h-16 w-16 items-center justify-center rounded-full bg-orange-50 group-hover:bg-orange-100 mb-6 transition-colors duration-300"
                   >
-                    <svg
-                      viewBox="0 0 200 80"
-                      fill="none"
-                      stroke="currentColor"
-                      className="text-orange-200"
-                      aria-hidden="true"
+                    <span className="text-xl font-medium text-orange-600">{step.id}</span>
+                  </motion.div>
+                  <h3 className="text-lg font-medium text-gray-900">{step.name}</h3>
+                  <p className="mt-2 text-base leading-7 text-gray-600">{step.description}</p>
+                </div>
+
+                {/* Connector arrows */}
+                {index !== steps.length - 1 && (
+                  <>
+                    {/* Mobile connector (vertical) */}
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
+                      transition={{ delay: 0.4 }}
+                      className="absolute top-full left-1/2 h-12 w-0.5 bg-orange-200 -translate-x-1/2 sm:hidden"
+                    />
+                    
+                    {/* Desktop connector (horizontal) */}
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
+                      transition={{ delay: 0.4 }}
+                      className="absolute top-1/2 right-0 hidden h-0.5 w-12 bg-orange-200 translate-x-full sm:block"
+                    />
+                    
+                    {/* Arrow head for desktop */}
+                    <motion.svg
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
+                      transition={{ delay: 0.6 }}
+                      className="absolute top-1/2 right-0 hidden h-5 w-5 text-orange-200 -translate-y-1/2 translate-x-[calc(100%+3rem)] sm:block"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
                     >
                       <path
-                        d="M0 40H180"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeDasharray="1, 6"
+                        fillRule="evenodd"
+                        d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                        clipRule="evenodd"
                       />
-                    </svg>
-                  </motion.div>
-                ) : null}
+                    </motion.svg>
+                  </>
+                )}
               </motion.div>
             ))}
           </div>

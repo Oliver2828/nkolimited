@@ -54,19 +54,45 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.2
+      staggerChildren: 0.15,
+      delayChildren: 0.2
     }
   }
 }
 
-const itemVariants = {
-  hidden: { y: 20, opacity: 0 },
+const cardVariants = {
+  hidden: { y: 30, opacity: 0 },
   visible: {
     y: 0,
     opacity: 1,
     transition: {
-      duration: 0.5
+      type: "spring",
+      stiffness: 100,
+      damping: 15
     }
+  },
+  hover: {
+    y: -8,
+    transition: { 
+      type: "spring",
+      stiffness: 300,
+      damping: 15
+    }
+  }
+}
+
+const listItemVariants = {
+  hidden: { x: -10, opacity: 0 },
+  visible: (i) => ({
+    x: 0,
+    opacity: 1,
+    transition: {
+      delay: i * 0.1 + 0.4
+    }
+  }),
+  hover: {
+    x: 5,
+    transition: { duration: 0.2 }
   }
 }
 
@@ -77,14 +103,20 @@ export default function Services() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          viewport={{ once: true, margin: "-100px" }}
           className="mx-auto max-w-2xl text-center"
         >
-          <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-            Our Comprehensive Services
+          <h2 className="text-3xl font-light tracking-tight text-gray-900 sm:text-4xl">
+            Our Comprehensive <span className="text-orange-500">Services</span>
           </h2>
-          <p className="mt-6 text-lg font-bold leading-8 text-gray-600">
+          <motion.div
+            initial={{ width: 0 }}
+            whileInView={{ width: '100px' }}
+            transition={{ delay: 0.3, duration: 0.6 }}
+            className="mx-auto mt-4 h-0.5 bg-orange-500"
+          />
+          <p className="mt-6 text-lg leading-8 text-gray-600">
             NKO Limited provides end-to-end solutions for your staffing and call center needs.
           </p>
         </motion.div>
@@ -93,32 +125,38 @@ export default function Services() {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-100px" }}
           className="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4"
         >
-          {services.map((service, index) => (
+          {services.map((service) => (
             <motion.div
               key={service.name}
-              variants={itemVariants}
-              whileHover={{ y: -5 }}
-              className="rounded-2xl bg-white p-8 shadow-xl ring-1 ring-orange-100 hover:ring-orange-200 transition-all duration-300"
+              variants={cardVariants}
+              whileHover="hover"
+              className="group rounded-xl bg-white p-8 shadow-lg hover:shadow-xl border border-gray-100"
             >
-              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-orange-600">
-                <service.icon className="h-6 w-6 text-white font-bold" aria-hidden="true" />
-              </div>
-              <h3 className="mt-6 text-lg font-extrabold leading-8 text-gray-900">{service.name}</h3>
-              <p className="mt-2 text-base font-bold leading-7 text-gray-600">{service.description}</p>
-              <ul className="mt-4 space-y-2">
-                {service.items.map((item) => (
+              <motion.div
+                whileHover={{ rotate: 5, scale: 1.05 }}
+                className="flex h-12 w-12 items-center justify-center rounded-lg bg-orange-50 group-hover:bg-orange-100 transition-colors duration-300"
+              >
+                <service.icon className="h-6 w-6 text-orange-600" aria-hidden="true" />
+              </motion.div>
+              
+              <h3 className="mt-6 text-lg font-medium text-gray-900">{service.name}</h3>
+              <p className="mt-2 text-base leading-7 text-gray-600">{service.description}</p>
+              
+              <ul className="mt-6 space-y-3">
+                {service.items.map((item, i) => (
                   <motion.li 
                     key={item}
-                    whileHover={{ x: 5 }}
+                    custom={i}
+                    variants={listItemVariants}
                     className="flex items-center"
                   >
                     <svg className="h-5 w-5 flex-shrink-0 text-orange-500" viewBox="0 0 20 20" fill="currentColor">
                       <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                     </svg>
-                    <span className="ml-3 text-sm font-bold text-gray-600">{item}</span>
+                    <span className="ml-3 text-sm text-gray-600">{item}</span>
                   </motion.li>
                 ))}
               </ul>
