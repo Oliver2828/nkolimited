@@ -400,7 +400,7 @@ const contactItems = [
   {
     icon: PhoneIcon,
     title: 'Phone',
-    content: 'Main: +234 800 000 0000\nSupport: +234 800 000 0001'
+    content: 'Main: +234 905 692 5668\nSupport: +234 810 546 0026'
   },
   {
     icon: EnvelopeIcon,
