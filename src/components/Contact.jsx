@@ -395,7 +395,7 @@ const contactItems = [
   {
     icon: MapPinIcon,
     title: 'Our Office',
-    content: '123 Business Avenue\nVictoria Island\nLagos, Nigeria'
+    content: '123 Business Avenue\nLekki Island\nLagos, Nigeria'
   },
   {
     icon: PhoneIcon,
