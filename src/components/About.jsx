@@ -7,6 +7,7 @@ export default function About() {
     { id: 1, name: 'Clients served', value: '250+', icon: UsersIcon },
     { id: 2, name: 'Workforce placed', value: '10,000+', icon: ChartBarIcon },
     { id: 3, name: 'Years of experience', value: '8+', icon: HeartIcon },
+    
     // { id: 4, name: 'Countries covered', value: '12', icon: GlobeAltIcon },
   ]
 
@@ -207,7 +208,7 @@ export default function About() {
                   className="w-full h-[500px] object-cover"
                 />
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6 text-white z-20">
-                  <p className="text-sm font-medium">Our dedicated team at the 2023 annual strategy conference</p>
+                  <p className="text-sm font-medium"></p>
                 </div>
               </motion.div>
             </motion.div>
