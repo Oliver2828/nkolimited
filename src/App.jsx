@@ -3,7 +3,7 @@ import Header from './components/Header'
 import Hero from './components/Hero'
 import Services from './components/Services'
 import Process from './components/Process'
-// import About from './components/About'
+import About from './components/About'
 // import Testimonials from './components/Testimonials'
 import Contact from './components/Contact' // Add this line
 import CTA from './components/CTA'
@@ -17,7 +17,7 @@ function App() {
         <Hero />
         <Services />
         <Process />
-        {/* <About /> */}
+        <About />
         {/* <Testimonials /> */}
         <Contact /> 
         <CTA />

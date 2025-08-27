@@ -1,8 +1,11 @@
-import React from 'react'
-import { motion } from 'framer-motion'
-import { ArrowRightIcon } from '@heroicons/react/20/solid'
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import { ArrowRightIcon, PhoneIcon, ChatBubbleLeftRightIcon } from '@heroicons/react/20/solid';
 
 export default function CTA() {
+  const [isButtonHovered, setIsButtonHovered] = useState(false);
+  
+  // Animation variants for cleaner code organization
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -11,10 +14,10 @@ export default function CTA() {
         duration: 0.8,
         ease: "easeInOut",
         when: "beforeChildren",
-        staggerChildren: 0.2
+        staggerChildren: 0.3
       }
     }
-  }
+  };
 
   const textReveal = {
     hidden: { opacity: 0, y: 30 },
@@ -23,10 +26,10 @@ export default function CTA() {
       y: 0,
       transition: {
         duration: 0.8,
-        ease: "easeInOut"
+        ease: [0.25, 0.46, 0.45, 0.94]
       }
     }
-  }
+  };
 
   const buttonVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -35,12 +38,12 @@ export default function CTA() {
       y: 0,
       transition: {
         duration: 0.6,
-        ease: "easeInOut"
+        ease: "easeOut"
       }
     },
     hover: {
       scale: 1.05,
-      boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.2)",
+      boxShadow: "0 10px 30px -5px rgba(0, 0, 0, 0.3)",
       transition: {
         type: "spring",
         stiffness: 400,
@@ -50,7 +53,7 @@ export default function CTA() {
     tap: {
       scale: 0.98
     }
-  }
+  };
 
   const secondaryButtonVariants = {
     hidden: { opacity: 0, x: -20 },
@@ -59,18 +62,30 @@ export default function CTA() {
       x: 0,
       transition: {
         duration: 0.6,
-        ease: "easeInOut"
+        delay: 0.4,
+        ease: "easeOut"
       }
     },
     hover: {
-      x: 5,
+      x: 8,
       transition: {
         type: "spring",
         stiffness: 300,
-        damping: 10
+        damping: 12
       }
     }
-  }
+  };
+
+  const iconPulse = {
+    animate: {
+      x: [0, 5, 0],
+      transition: {
+        repeat: Infinity,
+        duration: 1.8,
+        ease: "easeInOut"
+      }
+    }
+  };
 
   return (
     <motion.section 
@@ -78,45 +93,79 @@ export default function CTA() {
       whileInView="visible"
       viewport={{ once: true, margin: "-100px" }}
       variants={containerVariants}
-      className="bg-orange-700 overflow-hidden"
+      className="relative bg-gradient-to-r from-orange-600 to-orange-700 overflow-hidden"
     >
-      <div className="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:flex lg:items-center lg:justify-between lg:px-8">
-        <div className="overflow-hidden">
+      {/* Decorative elements */}
+      <div className="absolute top-0 left-0 w-full h-full opacity-10">
+        <div className="absolute top-10 left-10 w-40 h-40 rounded-full bg-white"></div>
+        <div className="absolute bottom-20 right-20 w-32 h-32 rounded-full bg-white"></div>
+      </div>
+      
+      <div className="relative mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:flex lg:items-center lg:justify-between lg:px-8">
+        <div className="lg:max-w-2xl">
           <motion.div className="overflow-hidden">
             <motion.h2 
               variants={textReveal}
-              className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl"
+              className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl"
             >
-              Ready to transform your workforce strategy?
+              Ready to Transform Your Workforce Strategy?
             </motion.h2>
           </motion.div>
           
           <motion.div className="overflow-hidden mt-6">
             <motion.p
               variants={textReveal}
-              className="max-w-3xl text-lg font-bold leading-8 text-white"
+              className="max-w-3xl text-xl leading-8 text-orange-100"
             >
               Get in touch with our team to discuss how NKO Limited can support your business growth with our premium staffing and call center solutions.
             </motion.p>
           </motion.div>
+
+          {/* Additional features list */}
+          <motion.div 
+            className="mt-8 flex flex-col sm:flex-row gap-6 text-orange-100"
+            variants={textReveal}
+          >
+            <div className="flex items-center">
+              <div className="flex-shrink-0">
+                <div className="w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center">
+                  <PhoneIcon className="w-4 h-4 text-white" />
+                </div>
+              </div>
+              <p className="ml-3 font-medium">24/7 Support</p>
+            </div>
+            
+            <div className="flex items-center">
+              <div className="flex-shrink-0">
+                <div className="w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center">
+                  <ChatBubbleLeftRightIcon className="w-4 h-4 text-white" />
+                </div>
+              </div>
+              <p className="ml-3 font-medium">Expert Consultation</p>
+            </div>
+          </motion.div>
         </div>
         
         <motion.div
-          className="mt-10 flex items-center gap-x-6 lg:mt-0"
+          className="mt-10 flex flex-col sm:flex-row items-center gap-6 lg:mt-0 lg:flex-col lg:items-end"
+          variants={buttonVariants}
         >
           <motion.a
             variants={buttonVariants}
             whileHover="hover"
             whileTap="tap"
+            onHoverStart={() => setIsButtonHovered(true)}
+            onHoverEnd={() => setIsButtonHovered(false)}
             href="#contact"
-            className="flex items-center gap-x-2 rounded-lg bg-white px-6 py-3.5 text-lg font-extrabold text-orange-700 shadow-lg hover:bg-orange-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            className="group flex items-center gap-x-3 rounded-lg bg-white px-8 py-4 text-lg font-extrabold text-orange-700 shadow-lg hover:bg-orange-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white transition-colors duration-300"
+            aria-label="Contact us for workforce solutions"
           >
             Contact Us
             <motion.span
-              animate={{ x: [0, 4, 0] }}
-              transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+              animate={isButtonHovered ? { x: [0, 5, 0] } : { x: 0 }}
+              transition={{ duration: 0.8, ease: "easeInOut" }}
             >
-              <ArrowRightIcon className="h-5 w-5 text-orange-700" />
+              <ArrowRightIcon className="h-5 w-5 text-orange-700 transition-transform duration-300 group-hover:translate-x-1" />
             </motion.span>
           </motion.a>
           
@@ -124,12 +173,19 @@ export default function CTA() {
             variants={secondaryButtonVariants}
             whileHover="hover"
             href="#services" 
-            className="text-lg font-bold leading-6 text-white hover:text-orange-200"
+            className="group inline-flex items-center text-lg font-bold leading-6 text-white hover:text-orange-200 transition-colors duration-300"
+            aria-label="Learn more about our services"
           >
-            Learn more <span aria-hidden="true" className="inline-block">→</span>
+            Learn more 
+            <span 
+              aria-hidden="true" 
+              className="ml-2 inline-block transition-transform duration-300 group-hover:translate-x-1"
+            >
+              →
+            </span>
           </motion.a>
         </motion.div>
       </div>
     </motion.section>
-  )
+  );
 }
