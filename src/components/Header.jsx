@@ -134,20 +134,22 @@ export const Header = () => {
         <div className="flex items-center justify-between">
           <div className="flex lg:flex-1">
             <a href="#" className="-m-1.5 p-1.5 flex items-center">
-              <img
-                src={img}
-                alt="NKO Limited Logo"
-                className="w-10 h-10 object-contain mr-2"
-              />
-              <span className="sr-only">NKO Limited</span>
               <motion.div
                 variants={logoVariants}
                 initial="hidden"
                 animate="visible"
                 className="flex items-center"
               >
-                <span className="text-2xl font-bold text-gray-900">NKO</span>
-                <span className="ml-2 text-sm font-medium text-orange-600">LIMITED</span>
+                <img
+                  src={img}
+                  alt="NKO Limited Logo"
+                  className="h-10 w-auto object-contain"
+                />
+                <span className="sr-only">NKO Limited</span>
+                <div className="ml-3 flex flex-col">
+                  <span className="text-xl font-bold text-gray-900">NKO</span>
+                  <span className="text-xs font-medium text-orange-600 -mt-1">LIMITED</span>
+                </div>
               </motion.div>
             </a>
           </div>
@@ -231,12 +233,14 @@ export const Header = () => {
               <div className="flex items-center justify-between px-6 py-4">
                 <a href="#" className="-m-1.5 p-1.5 flex items-center">
                   <img
-                    src="/assets/logo1.jpg"
+                    src={img}
                     alt="NKO Limited Logo"
-                    className="w-10 h-10 object-contain mr-2"
+                    className="h-10 w-auto object-contain"
                   />
-                  <span className="text-2xl font-bold text-gray-900">NKO</span>
-                  <span className="ml-2 text-sm font-medium text-orange-600">LIMITED</span>
+                  <div className="ml-3 flex flex-col">
+                    <span className="text-xl font-bold text-gray-900">NKO</span>
+                    <span className="text-xs font-medium text-orange-600 -mt-1">LIMITED</span>
+                  </div>
                 </a>
                 <motion.button
                   whileTap={{ scale: 0.9 }}
