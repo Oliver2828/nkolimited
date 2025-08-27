@@ -5,10 +5,8 @@ import { UsersIcon, ChartBarIcon, GlobeAltIcon, HeartIcon, ArrowTopRightOnSquare
 export default function About() {
   const stats = [
     { id: 1, name: 'Clients served', value: '250+', icon: UsersIcon },
-    { id: 2, name: 'Workforce placed', value: '10,000+', icon: ChartBarIcon },
+    { id: 2, name: 'Workforce placed', value: '1,000+', icon: ChartBarIcon },
     { id: 3, name: 'Years of experience', value: '8+', icon: HeartIcon },
-    
-    // { id: 4, name: 'Countries covered', value: '12', icon: GlobeAltIcon },
   ]
 
   const values = [
@@ -127,7 +125,7 @@ export default function About() {
               className="mx-auto mt-4 h-1.5 bg-orange-300 rounded-full"
             />
             <p className="mt-6 text-xl font-medium leading-8 text-orange-100">
-              Pioneering workforce solutions since 2008
+              Pioneering workforce solutions with integrity, innovation, and excellence.
             </p>
             <motion.button
               whileHover={{ scale: 1.05 }}
@@ -245,7 +243,7 @@ export default function About() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
-            className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4"
+            className="grid grid-cols-1 gap-8 md:grid-cols-3"
           >
             {stats.map((stat) => {
               const IconComponent = stat.icon;
@@ -318,12 +316,6 @@ export default function About() {
           ))}
         </motion.div>
       </div>
-
-      
-      
-
-
-      
     </motion.div>
   )
 }
