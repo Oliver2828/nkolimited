@@ -185,7 +185,7 @@ export default function About() {
                 Founded in Lagos in 2008, NKO Limited began as a boutique staffing agency with a vision to transform how businesses access talent.
               </p>
               <p className="text-lg leading-8 text-gray-600 mb-6">
-                Today, we've grown into a full-service workforce solutions provider serving clients across multiple industries in 12 countries. Our journey has been marked by strategic innovation, an unwavering commitment to quality, and deep partnerships with both clients and candidates.
+                Today, we've grown into a full-service workforce solutions provider serving clients across multiple industries. Our journey has been marked by strategic innovation, an unwavering commitment to quality, and deep partnerships with both clients and candidates.
               </p>
               <p className="text-lg leading-8 text-gray-600">
                 What sets us apart is our unique blend of local expertise and global perspective, enabling us to deliver tailored solutions that drive real business results.
