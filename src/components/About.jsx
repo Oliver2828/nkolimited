@@ -6,8 +6,8 @@ export default function About() {
   const stats = [
     { id: 1, name: 'Clients served', value: '250+', icon: UsersIcon },
     { id: 2, name: 'Workforce placed', value: '10,000+', icon: ChartBarIcon },
-    { id: 3, name: 'Years of experience', value: '15+', icon: HeartIcon },
-    { id: 4, name: 'Countries covered', value: '12', icon: GlobeAltIcon },
+    { id: 3, name: 'Years of experience', value: '8+', icon: HeartIcon },
+    // { id: 4, name: 'Countries covered', value: '12', icon: GlobeAltIcon },
   ]
 
   const values = [
@@ -182,7 +182,7 @@ export default function About() {
                 From Humble Beginnings to Industry Leaders
               </motion.h3>
               <p className="text-lg leading-8 text-gray-600 mb-6">
-                Founded in Lagos in 2008, NKO Limited began as a boutique staffing agency with a vision to transform how businesses access talent.
+                Founded in Lagos, NKO Limited began as a boutique staffing agency with a vision to transform how businesses access talent.
               </p>
               <p className="text-lg leading-8 text-gray-600 mb-6">
                 Today, we've grown into a full-service workforce solutions provider serving clients across multiple industries. Our journey has been marked by strategic innovation, an unwavering commitment to quality, and deep partnerships with both clients and candidates.
