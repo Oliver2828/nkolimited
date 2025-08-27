@@ -210,7 +210,7 @@ export const Header = () => {
         </div>
       </nav>
       
-      {/* Mobile menu with AnimatePresence for smooth exit animations */}
+      {/* Mobile menu with deep orange color scheme */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div 
@@ -227,10 +227,10 @@ export const Header = () => {
               initial="closed"
               animate="open"
               exit="closed"
-              className="fixed inset-y-0 right-0 z-50 w-full max-w-sm bg-white shadow-xl"
+              className="fixed inset-y-0 right-0 z-50 w-full max-w-sm bg-orange-900 shadow-xl"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="flex items-center justify-between px-6 py-4">
+              <div className="flex items-center justify-between px-6 py-4 bg-orange-900">
                 <a href="#" className="-m-1.5 p-1.5 flex items-center">
                   <img
                     src={img}
@@ -238,30 +238,30 @@ export const Header = () => {
                     className="h-10 w-auto object-contain"
                   />
                   <div className="ml-3 flex flex-col">
-                    <span className="text-xl font-bold text-gray-900">NKO</span>
-                    <span className="text-xs font-medium text-orange-600 -mt-1">LIMITED</span>
+                    <span className="text-xl font-bold text-white">NKO</span>
+                    <span className="text-xs font-medium text-orange-200 -mt-1">LIMITED</span>
                   </div>
                 </a>
                 <motion.button
                   whileTap={{ scale: 0.9 }}
                   type="button"
-                  className="-m-2.5 rounded-md p-2.5 text-gray-700"
+                  className="-m-2.5 rounded-md p-2.5 text-white"
                   onClick={() => setMobileMenuOpen(false)}
                   aria-label="Close menu"
                 >
                   <XMarkIcon className="h-6 w-6" aria-hidden="true" />
                 </motion.button>
               </div>
-              <div className="mt-6 flow-root px-6">
-                <div className="-my-6 divide-y divide-gray-500/10">
+              <div className="mt-6 flow-root px-6 bg-orange-900">
+                <div className="-my-6 divide-y divide-orange-700">
                   <div className="space-y-2 py-6">
                     {navigation.map((item) => (
                       <motion.a
                         key={item.name}
                         href={item.href}
-                        className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                        className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-white hover:bg-orange-800"
                         onClick={() => setMobileMenuOpen(false)}
-                        whileHover={{ x: 5 }}
+                        whileHover={{ x: 5, backgroundColor: "#9c4221" }}
                         transition={{ type: "spring", stiffness: 400 }}
                       >
                         {item.name}
@@ -271,9 +271,9 @@ export const Header = () => {
                   <div className="py-6">
                     <motion.a
                       href="#contact"
-                      className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                      className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-white hover:bg-orange-800"
                       onClick={() => setMobileMenuOpen(false)}
-                      whileHover={{ x: 5 }}
+                      whileHover={{ x: 5, backgroundColor: "#9c4221" }}
                       transition={{ type: "spring", stiffness: 400 }}
                     >
                       Get started
