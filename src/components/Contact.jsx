@@ -203,7 +203,6 @@ export default function Contact() {
       label: 'Service Interested In',
       type: 'select',
       options: [
-        'Select a service',
         'Staffing Solutions',
         'Call Center Outsourcing',
         'Payment Management',
@@ -330,64 +329,89 @@ export default function Contact() {
                   initial="hidden"
                   animate={isInView ? "visible" : "hidden"}
                   custom={index}
-                  className="relative"
+                  className={field.type === 'select' ? "mb-6" : "relative"}
                 >
-                  <label 
-                    htmlFor={field.id} 
-                    className={`absolute left-4 transition-all duration-300 ${
-                      focusedField === field.name || formData[field.name] 
-                        ? '-top-3 text-xs bg-white px-2 text-orange-600 font-medium' 
-                        : 'top-3 text-gray-500'
-                    }`}
-                  >
-                    {field.label}
-                  </label>
-                  {field.type === 'textarea' ? (
-                    <motion.textarea
-                      id={field.id}
-                      name={field.name}
-                      rows={4}
-                      value={formData[field.name]}
-                      onChange={handleChange}
-                      onFocus={() => setFocusedField(field.name)}
-                      onBlur={() => setFocusedField(null)}
-                      className="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500 p-4 pt-5 border font-medium"
-                      required
-                      whileFocus="focus"
-                      variants={inputFocusVariants}
-                    />
-                  ) : field.type === 'select' ? (
-                    <motion.select
-                      id={field.id}
-                      name={field.name}
-                      value={formData[field.name]}
-                      onChange={handleChange}
-                      onFocus={() => setFocusedField(field.name)}
-                      onBlur={() => setFocusedField(null)}
-                      className="mt-1 block w-full rounded-xl border-gray-300 py-3 pl-4 pr-10 text-base focus:border-orange-500 focus:outline-none focus:ring-orange-500 border font-medium"
-                      required
-                      whileFocus="focus"
-                      variants={inputFocusVariants}
-                    >
-                      {field.options.map((option, i) => (
-                        <option key={i} value={option}>{option}</option>
-                      ))}
-                    </motion.select>
+                  {field.type === 'select' ? (
+                    <div>
+                      <label
+                        htmlFor={field.id}
+                        className="block mb-1 text-sm font-medium text-orange-600"
+                      >
+                        {field.label}
+                      </label>
+                      <motion.select
+                        id={field.id}
+                        name={field.name}
+                        value={formData[field.name]}
+                        onChange={handleChange}
+                        onFocus={() => setFocusedField(field.name)}
+                        onBlur={() => setFocusedField(null)}
+                        className="block w-full rounded-xl border-gray-300 py-3 pl-4 pr-10 text-base focus:border-orange-500 focus:outline-none focus:ring-orange-500 border font-medium bg-white"
+                        required
+                        whileFocus="focus"
+                        variants={inputFocusVariants}
+                      >
+                        <option value="" disabled>
+                          Select a service
+                        </option>
+                        {field.options.map((option, i) => (
+                          <option key={i} value={option}>{option}</option>
+                        ))}
+                      </motion.select>
+                    </div>
+                  ) : field.type === 'textarea' ? (
+                    <>
+                      <label 
+                        htmlFor={field.id} 
+                        className={`absolute left-4 transition-all duration-300 ${
+                          focusedField === field.name || formData[field.name] 
+                            ? '-top-3 text-xs bg-white px-2 text-orange-600 font-medium' 
+                            : 'top-3 text-gray-500'
+                        }`}
+                      >
+                        {field.label}
+                      </label>
+                      <motion.textarea
+                        id={field.id}
+                        name={field.name}
+                        rows={4}
+                        value={formData[field.name]}
+                        onChange={handleChange}
+                        onFocus={() => setFocusedField(field.name)}
+                        onBlur={() => setFocusedField(null)}
+                        className="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500 p-4 pt-5 border font-medium"
+                        required
+                        whileFocus="focus"
+                        variants={inputFocusVariants}
+                      />
+                    </>
                   ) : (
-                    <motion.input
-                      type={field.type}
-                      name={field.name}
-                      id={field.id}
-                      value={formData[field.name]}
-                      onChange={handleChange}
-                      onFocus={() => setFocusedField(field.name)}
-                      onBlur={() => setFocusedField(null)}
-                      autoComplete={field.autoComplete}
-                      className="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500 p-4 pt-5 border font-medium"
-                      required
-                      whileFocus="focus"
-                      variants={inputFocusVariants}
-                    />
+                    <>
+                      <label 
+                        htmlFor={field.id} 
+                        className={`absolute left-4 transition-all duration-300 ${
+                          focusedField === field.name || formData[field.name] 
+                            ? '-top-3 text-xs bg-white px-2 text-orange-600 font-medium' 
+                            : 'top-3 text-gray-500'
+                        }`}
+                      >
+                        {field.label}
+                      </label>
+                      <motion.input
+                        type={field.type}
+                        name={field.name}
+                        id={field.id}
+                        value={formData[field.name]}
+                        onChange={handleChange}
+                        onFocus={() => setFocusedField(field.name)}
+                        onBlur={() => setFocusedField(null)}
+                        autoComplete={field.autoComplete}
+                        className="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500 p-4 pt-5 border font-medium"
+                        required
+                        whileFocus="focus"
+                        variants={inputFocusVariants}
+                      />
+                    </>
                   )}
                 </motion.div>
               ))}
